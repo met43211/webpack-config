@@ -1,5 +1,5 @@
 import webpack from "webpack";
-import { buidWebpack } from "./config/build/buildWebapck";
+import { buildWebpack } from "./config/build/buildWebpack";
 import {
   BuildMode,
   BuildPaths,
@@ -22,7 +22,7 @@ export default (env: EnvVariables) => {
     src: path.resolve(__dirname, "src"),
     public: path.resolve(__dirname, "public"),
   };
-  const config: webpack.Configuration = buidWebpack({
+  const config: webpack.Configuration = buildWebpack({
     port: env.port ?? 3000,
     mode: env.mode ?? "development",
     paths,

@@ -5,7 +5,7 @@ import { buildPlugins } from "./buildPlugins";
 import { buildResolvers } from "./buildResolvers";
 import { BuildOptions } from "./types/types";
 
-export function buidWebpack(options: BuildOptions): webpack.Configuration {
+export function buildWebpack(options: BuildOptions): webpack.Configuration {
   const { mode, paths } = options;
   const isDev = mode === "development";
 
@@ -23,6 +23,6 @@ export function buidWebpack(options: BuildOptions): webpack.Configuration {
     },
     resolve: buildResolvers(options),
     devtool: isDev && "inline-source-map",
-    devServer: isDev ? options : undefined,
+    devServer: isDev ? buildDevServer(options) : undefined,
   };
 }

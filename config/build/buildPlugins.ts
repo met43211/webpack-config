@@ -7,6 +7,7 @@ import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import path from "path";
 import CopyPlugin from "copy-webpack-plugin";
+import fs from "fs";
 
 export function buildPlugins({
   mode,
@@ -16,11 +17,12 @@ export function buildPlugins({
 }: BuildOptions): Configuration["plugins"] {
   const isDev = mode === "development";
   const isProd = mode === "production";
+  const faviconPath = path.resolve(paths.public, "favicon.ico");
 
   const plugins: Configuration["plugins"] = [
     new HtmlWebpackPlugin({
       template: paths.html,
-      favicon: path.resolve(paths.public, "favicon.ico"),
+      favicon: fs.existsSync(faviconPath) ? faviconPath : undefined,
     }),
     new DefinePlugin({
       __PLATFORM__: JSON.stringify(platform),
